@@ -192,9 +192,12 @@ func main() {
 	fmt.Println("\nНовые устройства (отсутствовали при 1-м, появились при 2-м сканировании):")
 	if len(newDevices) == 0 {
 		fmt.Println("  Новых устройств не обнаружено.")
-		return
+	} else {
+		for _, ip := range sortedIPs(newDevices) {
+			fmt.Printf("   %-15s  %s\n", ip, newDevices[ip])
+		}
 	}
-	for _, ip := range sortedIPs(newDevices) {
-		fmt.Printf("   %-15s  %s\n", ip, newDevices[ip])
-	}
+
+	fmt.Print("\nНажмите Enter для выхода...")
+	bufio.NewReader(os.Stdin).ReadString('\n')
 }
